@@ -1,4 +1,8 @@
 from fastapi import FastAPI
+import os
+
+secret_key = os.environ.get("SECRET_KEY")
+
 
 app = FastAPI()
 
