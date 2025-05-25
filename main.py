@@ -5,13 +5,12 @@ import os
 
 app = FastAPI()
 
-
-
-# Load marks data from JSON file at startup
 def load_marks():
     json_path = os.path.join(os.path.dirname(__file__), "q-vercel-python.json")
     with open(json_path, "r") as f:
-        return json.load(f)
+        data = json.load(f)
+    # Convert list of dicts to a name:marks dict
+    return {entry["name"]: entry["marks"] for entry in data}
 
 MARKS_DB = load_marks()
 
