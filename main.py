@@ -5,6 +5,8 @@ import os
 
 app = FastAPI()
 
+
+
 # Load marks data from JSON file at startup
 def load_marks():
     json_path = os.path.join(os.path.dirname(__file__), "q-vercel-python.json")
@@ -15,5 +17,5 @@ MARKS_DB = load_marks()
 
 @app.get("/api")
 async def get_marks(name: List[str] = Query(...)):
-    results = [{"name": n, "mark": MARKS_DB.get(n, 0)} for n in name]
-    return {"results": results}
+    marks = [MARKS_DB.get(n, 0) for n in name]
+    return {"marks": marks}
